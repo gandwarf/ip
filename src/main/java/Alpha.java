@@ -77,12 +77,6 @@ public class Alpha {
         System.out.println("____________________________________________________________");
     }
 
-    private static void blah() {
-        System.out.println("____________________________________________________________");
-        System.out.println(" blah");
-        System.out.println("____________________________________________________________");
-    }
-
     private static void exit() {
         System.out.println("____________________________________________________________");
         System.out.println(" Bye. Hope to see you soon!");
@@ -98,7 +92,6 @@ public class Alpha {
             try {
                 switch (words[0]) {
                     case "list" -> showList();
-                    case "blah" -> blah();
                     case "mark" -> markTask(Integer.parseInt(words[1]) - 1);
                     case "unmark" -> unmarkTask(Integer.parseInt(words[1]) - 1);
                     case "todo" -> add(new ToDo(words[1]));
@@ -111,10 +104,16 @@ public class Alpha {
                         String[] times = parts[1].split(" /to ", 2);
                         add(new Event(parts[0], times[0], times[1]));
                     }
-                    default -> System.out.println("Unknown command. Try again.");
+                    default -> {
+                        System.out.println("____________________________________________________________");
+                        System.out.println(" OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        System.out.println("____________________________________________________________");
+                    }
                 }
             } catch (Exception e) {
-                System.out.println("Invalid input format. Try again.");
+                System.out.println("____________________________________________________________");
+                System.out.println(" OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println("____________________________________________________________");
             }
             input = in.nextLine();
         }
