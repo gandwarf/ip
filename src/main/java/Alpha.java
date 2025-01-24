@@ -1,16 +1,34 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Alpha {
-    private static void greeting() {
+    private static final ArrayList<Task> list = new ArrayList<>();
+
+    Alpha() {}
+
+    private static void add(Task task) {
+        list.add(task); // Add task to ArrayList
         System.out.println("____________________________________________________________");
-        System.out.println(" Hello! I'm Alpha");
-        System.out.println(" What can I do for you?");
+        System.out.println(" added: " + task);
         System.out.println("____________________________________________________________");
     }
 
     private static void showList() {
         System.out.println("____________________________________________________________");
-        System.out.println(" list");
+        if (list.isEmpty()) {
+            System.out.println(" The list is empty.");
+        } else {
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println(" " + (i + 1) + ". " + list.get(i)); // Display index and task
+            }
+        }
+        System.out.println("____________________________________________________________");
+    }
+
+    private static void greeting() {
+        System.out.println("____________________________________________________________");
+        System.out.println(" Hello! I'm Alpha");
+        System.out.println(" What can I do for you?");
         System.out.println("____________________________________________________________");
     }
 
@@ -36,6 +54,9 @@ public class Alpha {
                 showList();
             } else if (words[0].equals("blah")) {
                 blah();
+            } else {
+                String description = String.join(" ", words);
+                add(new Task(description));
             }
             input = in.nextLine();
             words = input.split("\\s+");
