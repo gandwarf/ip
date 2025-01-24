@@ -9,7 +9,9 @@ public class Alpha {
     private static void add(Task task) {
         list.add(task); // Add task to ArrayList
         System.out.println("____________________________________________________________");
-        System.out.println(" added: " + task);
+        System.out.println(" Got it. I've added this task:");
+        System.out.println("   " + task);
+        System.out.println(" Now you ave " + list.size() + " tasks in the list.");
         System.out.println("____________________________________________________________");
     }
 
@@ -18,6 +20,7 @@ public class Alpha {
         if (list.isEmpty()) {
             System.out.println(" The list is empty.");
         } else {
+            System.out.println(" Here are the todo borrow book");
             for (int i = 0; i < list.size(); i++) {
                 System.out.println(" " + (i + 1) + "." + list.get(i)); // Display index and task
             }
@@ -90,38 +93,30 @@ public class Alpha {
         Scanner in = new Scanner(System.in);
         greeting();
         String input = in.nextLine();
-        String[] words = input.split("\\s+");
         while (!input.equals("bye")) {
-            switch (words[0]) {
-                case "list" -> showList();
-                case "blah" -> blah();
-                case "mark" -> {
-                    try {
-                        int index = Integer.parseInt(words[1]) - 1; // Convert to 0-based index
-                        markTask(index);
-                    } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                        System.out.println("____________________________________________________________");
-                        System.out.println(" Invalid format. Use: mark <index>");
-                        System.out.println("____________________________________________________________");
+            String[] words = input.split("\\s+", 2);
+            try {
+                switch (words[0]) {
+                    case "list" -> showList();
+                    case "blah" -> blah();
+                    case "mark" -> markTask(Integer.parseInt(words[1]) - 1);
+                    case "unmark" -> unmarkTask(Integer.parseInt(words[1]) - 1);
+                    case "todo" -> add(new ToDo(words[1]));
+                    case "deadline" -> {
+                        String[] parts = words[1].split(" /by ", 2);
+                        add(new Deadline(parts[0], parts[1]));
                     }
-                }
-                case "unmark" -> {
-                    try {
-                        int index = Integer.parseInt(words[1]) - 1; // Convert to 0-based index
-                        unmarkTask(index);
-                    } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                        System.out.println("____________________________________________________________");
-                        System.out.println(" Invalid format. Use: unmark <index>");
-                        System.out.println("____________________________________________________________");
+                    case "event" -> {
+                        String[] parts = words[1].split(" /from ", 2);
+                        String[] times = parts[1].split(" /to ", 2);
+                        add(new Event(parts[0], times[0], times[1]));
                     }
+                    default -> System.out.println("Unknown command. Try again.");
                 }
-                default -> {
-                    String description = String.join(" ", words);
-                    add(new Task(description));
-                }
+            } catch (Exception e) {
+                System.out.println("Invalid input format. Try again.");
             }
             input = in.nextLine();
-            words = input.split("\\s+");
         }
         exit();
     }
