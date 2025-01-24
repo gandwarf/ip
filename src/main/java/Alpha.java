@@ -83,6 +83,21 @@ public class Alpha {
         System.out.println("____________________________________________________________");
     }
 
+    private static void deleteTask(int index) {
+        if (index >= 0 && index < list.size()) {
+            Task removedTask = list.remove(index); // Remove the task
+            System.out.println("____________________________________________________________");
+            System.out.println(" Noted. I've removed this task:");
+            System.out.println("   " + removedTask);
+            System.out.println(" Now you have " + list.size() + " tasks in the list.");
+            System.out.println("____________________________________________________________");
+        } else {
+            System.out.println("____________________________________________________________");
+            System.out.println(" Invalid index: " + (index + 1));
+            System.out.println("____________________________________________________________");
+        }
+    }
+
     private static void run() {
         Scanner in = new Scanner(System.in);
         greeting();
@@ -104,6 +119,7 @@ public class Alpha {
                         String[] times = parts[1].split(" /to ", 2);
                         add(new Event(parts[0], times[0], times[1]));
                     }
+                    case "delete" -> deleteTask(Integer.parseInt(words[1]) - 1);
                     default -> {
                         System.out.println("____________________________________________________________");
                         System.out.println(" OOPS!!! I'm sorry, but I don't know what that means :-(");
