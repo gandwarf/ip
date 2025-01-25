@@ -1,0 +1,7 @@
+todo read book
+deadline submit report /by 2025-01-31
+event meeting /from 10:00 /to 12:00
+list
+mark 2
+delete 1
+bye
