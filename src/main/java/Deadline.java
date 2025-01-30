@@ -1,3 +1,7 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
 /**
  * Represents a task with a specific deadline.
  * In addition to a name (inherited from {@link Task}),
@@ -8,7 +12,10 @@ public class Deadline extends Task {
     /**
      * The deadline or due date associated with this task.
      */
-    private final String deadline;
+    private final LocalDateTime deadline;
+    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy, h:mma",
+            Locale.ENGLISH);
 
     /**
      * Constructs a new {@code Deadline} task with the specified
@@ -19,7 +26,11 @@ public class Deadline extends Task {
      */
     Deadline(String taskName, String deadline) {
         super(taskName);
-        this.deadline = deadline;
+        try {
+            this.deadline = LocalDateTime.parse(deadline, INPUT_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Invalid date format. Use yyyy-MM-dd HHmm");
+        }
     }
 
     /**
@@ -33,7 +44,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline + ")";
+        return "[D]" + super.toString() + " (by: " + deadline.format(OUTPUT_FORMAT) + ")";
     }
 
     /**
@@ -43,7 +54,7 @@ public class Deadline extends Task {
      * @return A string combining the task name and deadline, separated by " | ".
      */
     public String getFileFormat() {
-        return this.taskName + " | " + this.deadline;
+        return this.taskName + " | " + this.deadline.format(INPUT_FORMAT);
     }
 }
 
