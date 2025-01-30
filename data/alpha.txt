@@ -1,0 +1,7 @@
+T | 0 |      sleep
+T | 0 |      eat
+T | 0 |      homework
+E | 0 |      code      | 19:00 | 21:00
+D | 1 |      ip      | 31
+T | 0 | a
+D | 0 | go | 4
