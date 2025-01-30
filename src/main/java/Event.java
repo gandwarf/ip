@@ -1,3 +1,7 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
 /**
  * Represents an event which occurs within a specific time range.
  * In addition to a name (inherited from {@link Task}),
@@ -8,12 +12,15 @@ public class Event extends Task {
     /**
      * The start time of this event.
      */
-    private final String from;
+    private final LocalDateTime from;
 
     /**
      * The end time of this event.
      */
-    private final String to;
+    private final LocalDateTime to;
+    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy, h:mma",
+            Locale.ENGLISH);
 
     /**
      * Constructs a new {@code Event} task with the specified
@@ -25,8 +32,12 @@ public class Event extends Task {
      */
     Event(String taskName, String from, String to) {
         super(taskName);
-        this.from = from;
-        this.to = to;
+        try {
+            this.from = LocalDateTime.parse(from, INPUT_FORMAT);
+            this.to = LocalDateTime.parse(to, INPUT_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Invalid date format. Use yyyy-MM-dd HHmm");
+        }
     }
 
     /**
@@ -40,7 +51,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return "[E]" + super.toString() + " (from: " +
+                from.format(OUTPUT_FORMAT) + " to: " + to.format(OUTPUT_FORMAT) + ")";
     }
 
     /**
@@ -51,6 +63,7 @@ public class Event extends Task {
      *         each separated by <code>" | "</code>.
      */
     public String getFileFormat() {
-        return this.taskName + " | " + this.from + " | " + this.to;
+        return this.taskName + " | " +
+                this.from.format(INPUT_FORMAT) + " | " + this.to.format(INPUT_FORMAT);
     }
 }

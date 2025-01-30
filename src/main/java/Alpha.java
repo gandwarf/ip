@@ -94,14 +94,14 @@ public class Alpha {
     private Task parseTask(String line) {
         try {
             String[] parts = line.split("\\|");
-            String type = parts[0];
-            boolean isDone = parts[1].equals(" 1 ");
-            String description = parts[2];
+            String type = parts[0].trim();
+            boolean isDone = parts[1].trim().equals("1");
+            String description = parts[2].trim();
 
             Task task = switch (type) {
-                case "T " -> new ToDo(description);
-                case "D " -> new Deadline(description, parts[3].trim());
-                case "E " -> new Event(description, parts[3].trim(), parts[4].trim());
+                case "T" -> new ToDo(description);
+                case "D" -> new Deadline(description, parts[3].trim());
+                case "E" -> new Event(description, parts[3].trim(), parts[4].trim());
                 default -> {
                     System.out.println("Unknown task type: " + type);
                     yield null;
