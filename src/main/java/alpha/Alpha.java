@@ -79,6 +79,7 @@ public class Alpha {
     /**
      * The application's entry point. Creates an {@code Alpha} instance and runs it.
      *
+     * 
      * @param args Command line arguments (not used).
      */
     public static void main(String[] args) {
