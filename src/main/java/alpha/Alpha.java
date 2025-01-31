@@ -8,16 +8,33 @@ import alpha.task.Event;
 import java.util.Scanner;
 
 /**
- * The {@code Alpha} class is a console-based task manager application. It supports
- * creating, listing, marking, unmarking, and deleting different types of tasks
- * (ToDo, Deadline, Event). Tasks are persisted to and loaded from a file.
+ * Represents the main entry point of the Alpha task manager application.
+ * <p>
+ * This console-based application supports various commands to manage tasks:
+ * listing, marking, unmarking, creating, and deleting different types of tasks
+ * (ToDo, Deadline, Event). It also handles the saving and loading of tasks.
  */
 public class Alpha {
 
+    /**
+     * Handles all user interaction (input and output) within the application.
+     */
     private final Ui ui;
+
+    /**
+     * Responsible for saving and loading tasks from the storage file.
+     */
     private final Storage storage;
+
+    /**
+     * Maintains and manipulates the list of tasks in memory.
+     */
     private final TaskList taskList;
 
+    /**
+     * Constructs an instance of {@code Alpha}, initializing the user interface,
+     * storage, and task list components.
+     */
     public Alpha() {
         ui = new Ui();
         storage = new Storage();
@@ -25,17 +42,22 @@ public class Alpha {
     }
 
     /**
-     * The main loop of the program that processes user commands from standard input:
+     * Continuously reads user commands from the standard input and executes them
+     * until the "bye" command is encountered. Supported commands include:
      * <ul>
-     *   <li><b>list</b> - Show all tasks.</li>
-     *   <li><b>mark</b> <i>index</i> - Mark the task at the given index.</li>
-     *   <li><b>unmark</b> <i>index</i> - Unmark the task at the given index.</li>
-     *   <li><b>todo</b> <i>description</i> - Add a ToDo task.</li>
-     *   <li><b>deadline</b> <i>description</i> /by <i>deadline</i> - Add a Deadline task.</li>
-     *   <li><b>event</b> <i>description</i> /from <i>start</i> /to <i>end</i> - Add an Event task.</li>
-     *   <li><b>delete</b> <i>index</i> - Delete the task at the given index.</li>
-     *   <li><b>bye</b> - Exit the program.</li>
+     *     <li><b>list</b>: Display all tasks.</li>
+     *     <li><b>mark &lt;index&gt;</b>: Mark the task at the specified index.</li>
+     *     <li><b>unmark &lt;index&gt;</b>: Unmark the task at the specified index.</li>
+     *     <li><b>todo &lt;description&gt;</b>: Add a new ToDo task.</li>
+     *     <li><b>deadline &lt;description&gt; /by &lt;deadline&gt;</b>: Add a new Deadline task.</li>
+     *     <li><b>event &lt;description&gt; /from &lt;start&gt; /to &lt;end&gt;</b>: Add a new Event task.</li>
+     *     <li><b>delete &lt;index&gt;</b>: Delete the task at the specified index.</li>
+     *     <li><b>bye</b>: Exit the application.</li>
      * </ul>
+     * <p>
+     * If an invalid command is entered or if an exception occurs while processing
+     * a command, an error message is displayed.
+     * </p>
      */
     public void run() {
         Scanner in = new Scanner(System.in);
@@ -77,14 +99,13 @@ public class Alpha {
     }
 
     /**
-     * The application's entry point. Creates an {@code Alpha} instance and runs it.
+     * Launches the Alpha application by creating an {@code Alpha} instance
+     * and invoking its {@link #run()} method.
      *
-     * @param args Command line arguments (not used).
+     * @param args Command-line arguments (not used in this application).
      */
     public static void main(String[] args) {
         Alpha alpha = new Alpha();
         alpha.run();
     }
 }
-
-

@@ -14,24 +14,38 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The {@code Storage} class handles reading from and writing to a file
- * to persist task data. It provides methods to save tasks to a file
- * and load them back into memory.
+ * Manages data persistence for the Alpha application by reading and writing
+ * tasks to an external file. This class provides methods to save a list of
+ * tasks and load them back into memory.
  */
 public class Storage {
+
+    /**
+     * Represents the current working directory of the user.
+     */
     private static final Path HOME = Paths.get("").toAbsolutePath();
+
+    /**
+     * Path to the directory where data files will be stored.
+     */
     private static final Path DATA_PATH = HOME.resolve("data");
+
+    /**
+     * Path to the specific data file where tasks are saved.
+     */
     private static final Path FILE_PATH = DATA_PATH.resolve("alpha.txt");
 
     /**
-     * Constructs a {@code Storage} instance.
+     * Constructs a {@code Storage} object for handling task data.
      */
-    public Storage() {}
+    public Storage() {
+    }
 
     /**
-     * Saves the given list of tasks to a file.
+     * Saves the provided list of tasks to the data file. If the directories
+     * do not exist, they are created automatically before writing.
      *
-     * @param tasks The list of tasks to be saved.
+     * @param tasks The list of tasks to be written to the file.
      */
     protected void save(ArrayList<Task> tasks) {
         try {
@@ -50,9 +64,10 @@ public class Storage {
     }
 
     /**
-     * Loads tasks from the file, if it exists.
+     * Loads tasks from the data file into memory. If the file does not exist,
+     * an empty list of tasks is returned.
      *
-     * @return A list of tasks read from the file.
+     * @return A list of tasks read from the data file.
      */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -74,10 +89,10 @@ public class Storage {
     }
 
     /**
-     * Converts a {@code Task} into a formatted string for file storage.
+     * Converts a task into a string format suitable for saving to the data file.
      *
      * @param task The task to be converted.
-     * @return A formatted string representing the task.
+     * @return A formatted string representing the task data.
      */
     protected String taskToFileFormat(Task task) {
         String done = task.isMarked() ? "1" : "0";
@@ -92,16 +107,17 @@ public class Storage {
     }
 
     /**
-     * Parses a task from a formatted string.
+     * Parses a single line of text to reconstruct the corresponding task object.
      *
-     * @param line The formatted task string.
-     * @return The corresponding {@code Task} object, or {@code null} if parsing fails.
+     * @param line A formatted string representing a task.
+     * @return The {@code Task} object derived from the given string,
+     *         or {@code null} if the line is invalid or cannot be parsed.
      */
     protected Task parseTask(String line) {
         try {
             String[] parts = line.split("\\|");
             String type = parts[0].trim();
-            boolean isDone = parts[1].trim().equals("1");
+            boolean isDone = "1".equals(parts[1].trim());
             String description = parts[2].trim();
 
             Task task = switch (type) {

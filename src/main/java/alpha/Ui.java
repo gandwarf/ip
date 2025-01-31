@@ -1,18 +1,19 @@
 package alpha;
 
 /**
- * The {@code Ui} class handles the user interface interactions.
- * It provides methods to display a greeting message and an exit message.
+ * Handles user interface interactions for the Alpha application.
+ * It offers methods to display greeting and exit messages.
  */
 public class Ui {
 
     /**
-     * Constructs a {@code Ui} instance.
+     * Constructs a new {@code Ui} instance.
      */
-    public Ui() {}
+    public Ui() {
+    }
 
     /**
-     * Displays a greeting message to the user.
+     * Prints a greeting message to welcome the user.
      */
     protected void greeting() {
         System.out.println("____________________________________________________________");
@@ -22,7 +23,7 @@ public class Ui {
     }
 
     /**
-     * Displays an exit message when the user leaves.
+     * Prints a farewell message when the application is about to close.
      */
     protected void exit() {
         System.out.println("____________________________________________________________");
