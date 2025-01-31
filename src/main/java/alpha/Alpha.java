@@ -81,6 +81,7 @@ public class Alpha {
                         taskList.add(new Event(parts[0], times[0], times[1]));
                     }
                     case "delete" -> taskList.deleteTask(Integer.parseInt(words[1]) - 1);
+                    case "find" -> taskList.findTasks(words[1]);
                     default -> {
                         System.out.println("____________________________________________________________");
                         System.out.println(" OOPS!!! I'm sorry, but I don't know what that means :-(");

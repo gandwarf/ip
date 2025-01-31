@@ -123,6 +123,28 @@ public class TaskList {
     }
 
     /**
+     * Finds tasks that contain the given keyword.
+     *
+     * @param keyword The search keyword.
+     */
+    public void findTasks(String keyword) {
+        System.out.println("____________________________________________________________");
+        System.out.println(" Here are the matching tasks in your list:");
+        int count = 1;
+        for (Task task : tasks) {
+            if (task.toString().toLowerCase().contains(keyword.toLowerCase())) {
+                System.out.println(" " + count + ". " + task);
+                count++;
+            }
+        }
+        if (count == 1) {
+            System.out.println(" No matching tasks found.");
+        }
+        System.out.println("____________________________________________________________");
+    }
+
+
+    /**
      * Returns the list of tasks.
      *
      * @return The list of tasks.
