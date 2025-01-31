@@ -1,3 +1,4 @@
+package alpha.task;
 /**
  * Represents a simple to-do task without a specific deadline or time range.
  * Inherits from the {@link Task} class.
@@ -9,7 +10,7 @@ public class ToDo extends Task {
      *
      * @param taskName The name or description of the to-do task.
      */
-    ToDo(String taskName) {
+    public ToDo(String taskName) {
         super(taskName);
     }
 

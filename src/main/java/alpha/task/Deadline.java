@@ -1,3 +1,5 @@
+package alpha.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -24,7 +26,7 @@ public class Deadline extends Task {
      * @param taskName The name or description of the task.
      * @param deadline The deadline or due date for the task.
      */
-    Deadline(String taskName, String deadline) {
+    public Deadline(String taskName, String deadline) {
         super(taskName);
         try {
             this.deadline = LocalDateTime.parse(deadline, INPUT_FORMAT);

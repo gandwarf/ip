@@ -1,3 +1,4 @@
+package alpha.task;
 /**
  * Represents a generic task with a name and a completion status.
  */
@@ -19,7 +20,7 @@ public class Task {
      *
      * @param taskName The name or description of the task.
      */
-    Task(String taskName) {
+    public Task(String taskName) {
         this.taskName = taskName;
         done = false;
     }
@@ -29,21 +30,21 @@ public class Task {
      *
      * @return {@code true} if the task is marked as done; {@code false} otherwise.
      */
-    protected boolean isMarked() {
+    public boolean isMarked() {
         return done;
     }
 
     /**
      * Marks this task as done.
      */
-    protected void mark() {
+    public void mark() {
         done = true;
     }
 
     /**
      * Unmarks this task (marks it as not done).
      */
-    protected void unMark() {
+    public void unMark() {
         done = false;
     }
 

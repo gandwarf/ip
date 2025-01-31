@@ -1,3 +1,5 @@
+package alpha.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -30,7 +32,7 @@ public class Event extends Task {
      * @param from The starting time of the event.
      * @param to The ending time of the event.
      */
-    Event(String taskName, String from, String to) {
+    public Event(String taskName, String from, String to) {
         super(taskName);
         try {
             this.from = LocalDateTime.parse(from, INPUT_FORMAT);
