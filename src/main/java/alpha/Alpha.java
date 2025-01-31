@@ -37,7 +37,7 @@ public class Alpha {
      *   <li><b>bye</b> - Exit the program.</li>
      * </ul>
      */
-    private void run() {
+    public void run() {
         Scanner in = new Scanner(System.in);
         ui.greeting();
         String input = in.nextLine();
