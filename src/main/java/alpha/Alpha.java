@@ -1,7 +1,5 @@
 package alpha;
 
-import java.util.Scanner;
-
 import alpha.task.Deadline;
 import alpha.task.Event;
 import alpha.task.TaskList;
@@ -19,7 +17,7 @@ public class Alpha {
     /**
      * Handles all user interaction (input and output) within the application.
      */
-    private final Ui ui;
+    protected final Ui ui;
 
     /**
      * Responsible for saving and loading tasks from the storage file.
@@ -59,54 +57,38 @@ public class Alpha {
      * a command, an error message is displayed.
      * </p>
      */
-    public void run() {
-        Scanner in = new Scanner(System.in);
-        ui.greeting();
-        String input = in.nextLine();
-        while (!input.equals("bye")) {
-            String[] words = input.split("\\s+", 2);
-            try {
-                switch (words[0]) {
-                    case "list" -> taskList.showList();
-                    case "mark" -> taskList.markTask(Integer.parseInt(words[1]) - 1);
-                    case "unmark" -> taskList.unmarkTask(Integer.parseInt(words[1]) - 1);
-                    case "todo" -> taskList.add(new ToDo(words[1]));
-                    case "deadline" -> {
-                        String[] parts = words[1].split(" /by ", 2);
-                        taskList.add(new Deadline(parts[0], parts[1]));
-                    }
-                    case "event" -> {
-                        String[] parts = words[1].split(" /from ", 2);
-                        String[] times = parts[1].split(" /to ", 2);
-                        taskList.add(new Event(parts[0], times[0], times[1]));
-                    }
-                    case "delete" -> taskList.deleteTask(Integer.parseInt(words[1]) - 1);
-                    case "find" -> taskList.findTasks(words[1]);
-                    default -> {
-                        System.out.println("____________________________________________________________");
-                        System.out.println(" OOPS!!! I'm sorry, but I don't know what that means :-(");
-                        System.out.println("____________________________________________________________");
-                    }
-                }
-            } catch (Exception e) {
-                System.out.println("____________________________________________________________");
-                System.out.println(" OOPS!!! I'm sorry, but I don't know what that means :-(");
-                System.out.println("____________________________________________________________");
+    public String getResponse(String input) {
+        StringBuilder response = new StringBuilder();
+        String[] words = input.split("\\s+", 2);
+        try {
+            switch (words[0]) {
+            case "list" -> response.append(taskList.getListString());
+            case "mark" -> response.append(taskList.markTask(Integer.parseInt(words[1]) - 1));
+            case "unmark" -> response.append(taskList.unmarkTask(Integer.parseInt(words[1]) - 1));
+            case "todo" -> {
+                ToDo task = new ToDo(words[1]);
+                response.append(taskList.add(task));
             }
-            input = in.nextLine();
+            case "deadline" -> {
+                String[] parts = words[1].split(" /by ", 2);
+                Deadline task = new Deadline(parts[0], parts[1]);
+                response.append(taskList.add(task));
+            }
+            case "event" -> {
+                String[] parts = words[1].split(" /from ", 2);
+                String[] times = parts[1].split(" /to ", 2);
+                Event task = new Event(parts[0], times[0], times[1]);
+                response.append(taskList.add(task));
+            }
+            case "delete" -> response.append(taskList.deleteTask(Integer.parseInt(words[1]) - 1));
+            case "find" -> response.append(taskList.findTasks(words[1]));
+            case "bye" -> response.append(ui.exit());
+            default -> response.append("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+        } catch (Exception e) {
+            response.append("OOPS!!! An error occurred while processing your command.");
         }
-        storage.save(taskList.getTasks());
-        ui.exit();
-    }
-
-    /**
-     * Launches the Alpha application by creating an {@code Alpha} instance
-     * and invoking its {@link #run()} method.
-     *
-     * @param args Command-line arguments (not used in this application).
-     */
-    public static void main(String[] args) {
-        Alpha alpha = new Alpha();
-        alpha.run();
+        return response.toString();
     }
 }
+
