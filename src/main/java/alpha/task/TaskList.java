@@ -1,6 +1,8 @@
 package alpha.task;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import alpha.Storage;
 
@@ -89,20 +91,16 @@ public class TaskList {
      * @param keyword The search keyword.
      */
     public String findTasks(String keyword) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Here are the matching tasks in your list:\n");
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
         int count = 1;
         for (Task task : tasks) {
             if (task.toString().toLowerCase().contains(keyword.toLowerCase())) {
-                sb.append(count).append(". ").append(task).append("\n");
-                count++;
+                sb.append(String.format("%d. %s%n", count++, task));
             }
         }
-        if (count == 1) {
-            sb.append("No matching tasks found.");
-        }
-        return sb.toString();
+        return count == 1 ? "No matching tasks found." : sb.toString();
     }
+
     /**
      * Returns the list of tasks.
      *
@@ -113,15 +111,11 @@ public class TaskList {
     }
 
     public String getListString() {
-        StringBuilder sb = new StringBuilder();
-        if (tasks.isEmpty()) {
-            sb.append("The list is empty.");
-        } else {
-            sb.append("Here are the tasks in your list:\n");
-            for (int i = 0; i < tasks.size(); i++) {
-                sb.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
-            }
-        }
-        return sb.toString();
+        return tasks.isEmpty()
+                ? "The list is empty."
+                : "Here are the tasks in your list:\n"
+                + IntStream.range(0, tasks.size())
+                        .mapToObj(i -> (i + 1) + ". " + tasks.get(i))
+                        .collect(Collectors.joining("\n"));
     }
 }
