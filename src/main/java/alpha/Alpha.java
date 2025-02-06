@@ -1,11 +1,11 @@
 package alpha;
 
-import alpha.task.TaskList;
-import alpha.task.ToDo;
+import java.util.Scanner;
+
 import alpha.task.Deadline;
 import alpha.task.Event;
-
-import java.util.Scanner;
+import alpha.task.TaskList;
+import alpha.task.ToDo;
 
 /**
  * Represents the main entry point of the Alpha task manager application.

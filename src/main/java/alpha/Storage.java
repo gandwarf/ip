@@ -1,10 +1,5 @@
 package alpha;
 
-import alpha.task.Task;
-import alpha.task.ToDo;
-import alpha.task.Deadline;
-import alpha.task.Event;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,6 +7,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import alpha.task.Deadline;
+import alpha.task.Event;
+import alpha.task.Task;
+import alpha.task.ToDo;
 
 /**
  * Manages data persistence for the Alpha application by reading and writing

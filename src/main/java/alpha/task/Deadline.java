@@ -14,10 +14,10 @@ public class Deadline extends Task {
     /**
      * The deadline or due date associated with this task.
      */
-    private final LocalDateTime deadline;
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy, h:mma",
             Locale.ENGLISH);
+    private final LocalDateTime deadline;
 
     /**
      * Constructs a new {@code Deadline} task with the specified

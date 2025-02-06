@@ -12,7 +12,7 @@ public class Task {
     /**
      * Indicates whether this task is marked as done.
      */
-    protected boolean done;
+    protected boolean isDone;
 
     /**
      * Constructs a new {@code Task} with the specified name.
@@ -22,7 +22,7 @@ public class Task {
      */
     public Task(String taskName) {
         this.taskName = taskName;
-        done = false;
+        isDone = false;
     }
 
     /**
@@ -31,21 +31,21 @@ public class Task {
      * @return {@code true} if the task is marked as done; {@code false} otherwise.
      */
     public boolean isMarked() {
-        return done;
+        return isDone;
     }
 
     /**
      * Marks this task as done.
      */
     public void mark() {
-        done = true;
+        isDone = true;
     }
 
     /**
      * Unmarks this task (marks it as not done).
      */
     public void unMark() {
-        done = false;
+        isDone = false;
     }
 
     /**
@@ -62,7 +62,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        if (done) {
+        if (isDone) {
             return "[X] " + taskName;
         } else {
             return "[ ] " + taskName;

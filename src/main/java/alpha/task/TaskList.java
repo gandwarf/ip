@@ -1,8 +1,8 @@
 package alpha.task;
 
-import alpha.Storage;
-
 import java.util.ArrayList;
+
+import alpha.Storage;
 
 /**
  * Represents a list of tasks. Provides methods to add, remove, and modify tasks.

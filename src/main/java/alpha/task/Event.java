@@ -10,20 +10,17 @@ import java.util.Locale;
  * this class maintains a start time and an end time.
  */
 public class Event extends Task {
-
+    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy, h:mma")
+            .withLocale(Locale.ENGLISH);
     /**
      * The start time of this event.
      */
     private final LocalDateTime from;
-
     /**
      * The end time of this event.
      */
     private final LocalDateTime to;
-    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy, h:mma",
-            Locale.ENGLISH);
-
     /**
      * Constructs a new {@code Event} task with the specified
      * task name, start time, and end time.
@@ -53,8 +50,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " +
-                from.format(OUTPUT_FORMAT) + " to: " + to.format(OUTPUT_FORMAT) + ")";
+        return "[E]" + super.toString() + " (from: "
+               + from.format(OUTPUT_FORMAT) + " to: " + to.format(OUTPUT_FORMAT) + ")";
     }
 
     /**
@@ -65,7 +62,7 @@ public class Event extends Task {
      *         each separated by <code>" | "</code>.
      */
     public String getFileFormat() {
-        return this.taskName + " | " +
-                this.from.format(INPUT_FORMAT) + " | " + this.to.format(INPUT_FORMAT);
+        return this.taskName + " | "
+               + this.from.format(INPUT_FORMAT) + " | " + this.to.format(INPUT_FORMAT);
     }
 }
