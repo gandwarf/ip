@@ -24,101 +24,62 @@ public class TaskList {
      *
      * @param task The task to be added.
      */
-    public void add(Task task) {
+    public String add(Task task) {
         tasks.add(task);
-        System.out.println("____________________________________________________________");
-        System.out.println(" Got it. I've added this task:");
-        System.out.println("   " + task);
-        System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
-        System.out.println("____________________________________________________________");
+        return "Got it. I've added this task:\n" + task + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
-
-    /**
-     * Displays all tasks in the list.
-     * If the list is empty, an appropriate message is shown.
-     */
-    public void showList() {
-        System.out.println("____________________________________________________________");
-        if (tasks.isEmpty()) {
-            System.out.println(" The list is empty.");
-        } else {
-            System.out.println(" Here are the task book:");
-            for (int i = 0; i < tasks.size(); i++) {
-                System.out.println(" " + (i + 1) + ". " + tasks.get(i));
-            }
-        }
-        System.out.println("____________________________________________________________");
-    }
-
     /**
      * Marks a task as done based on its index.
      *
      * @param index The index of the task to mark as done.
      */
-    public void markTask(int index) {
+    public String markTask(int index) {
         if (index >= 0 && index < tasks.size()) {
             Task task = tasks.get(index);
             if (task.isMarked()) {
-                System.out.println("____________________________________________________________");
-                System.out.println(" This task has already been marked.");
-                System.out.println("____________________________________________________________");
+                return "This task is already marked.";
             } else {
                 task.mark();
-                System.out.println("____________________________________________________________");
-                System.out.println(" Nice! I've marked this task as done:");
-                System.out.println("   " + task);
-                System.out.println("____________________________________________________________");
+                return "Nice! I've marked this task as done:\n" + task;
             }
         } else {
-            System.out.println("____________________________________________________________");
-            System.out.println(" Invalid index: " + (index + 1));
-            System.out.println("____________________________________________________________");
+            return "Invalid index: " + (index + 1);
         }
     }
+
 
     /**
      * Unmarks a task as not done based on its index.
      *
      * @param index The index of the task to unmark.
      */
-    public void unmarkTask(int index) {
+    public String unmarkTask(int index) {
         if (index >= 0 && index < tasks.size()) {
             Task task = tasks.get(index);
             if (!task.isMarked()) {
-                System.out.println("____________________________________________________________");
-                System.out.println(" This task has already been unmarked.");
-                System.out.println("____________________________________________________________");
+                return "This task is already unmarked.";
             } else {
                 task.unMark();
-                System.out.println("____________________________________________________________");
-                System.out.println(" OK, I've marked this task as not done yet:");
-                System.out.println("   " + task);
-                System.out.println("____________________________________________________________");
+                return "OK, I've marked this task as not done yet:\n" + task;
             }
         } else {
-            System.out.println("____________________________________________________________");
-            System.out.println(" Invalid index: " + (index + 1));
-            System.out.println("____________________________________________________________");
+            return "Invalid index: " + (index + 1);
         }
     }
+
 
     /**
      * Deletes a task from the list based on its index.
      *
      * @param index The index of the task to delete.
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         if (index >= 0 && index < tasks.size()) {
-            Task removedTask = tasks.remove(index); // Remove the task
-            System.out.println("____________________________________________________________");
-            System.out.println(" Noted. I've removed this task:");
-            System.out.println("   " + removedTask);
-            System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
-            System.out.println("____________________________________________________________");
+            Task removedTask = tasks.remove(index);
+            return "Noted. I've removed this task:\n" + removedTask + "\nNow you have " + tasks.size()
+                    + " tasks in the list.";
         } else {
-            System.out.println("____________________________________________________________");
-            System.out.println(" Invalid index: " + (index + 1));
-            System.out.println("____________________________________________________________");
+            return "Invalid index: " + (index + 1);
         }
     }
 
@@ -127,23 +88,21 @@ public class TaskList {
      *
      * @param keyword The search keyword.
      */
-    public void findTasks(String keyword) {
-        System.out.println("____________________________________________________________");
-        System.out.println(" Here are the matching tasks in your list:");
+    public String findTasks(String keyword) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:\n");
         int count = 1;
         for (Task task : tasks) {
             if (task.toString().toLowerCase().contains(keyword.toLowerCase())) {
-                System.out.println(" " + count + ". " + task);
+                sb.append(count).append(". ").append(task).append("\n");
                 count++;
             }
         }
         if (count == 1) {
-            System.out.println(" No matching tasks found.");
+            sb.append("No matching tasks found.");
         }
-        System.out.println("____________________________________________________________");
+        return sb.toString();
     }
-
-
     /**
      * Returns the list of tasks.
      *
@@ -151,5 +110,18 @@ public class TaskList {
      */
     public ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    public String getListString() {
+        StringBuilder sb = new StringBuilder();
+        if (tasks.isEmpty()) {
+            sb.append("The list is empty.");
+        } else {
+            sb.append("Here are the tasks in your list:\n");
+            for (int i = 0; i < tasks.size(); i++) {
+                sb.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+            }
+        }
+        return sb.toString();
     }
 }

@@ -15,19 +15,14 @@ public class Ui {
     /**
      * Prints a greeting message to welcome the user.
      */
-    protected void greeting() {
-        System.out.println("____________________________________________________________");
-        System.out.println(" Hello! I'm Alpha");
-        System.out.println(" What can I do for you?");
-        System.out.println("____________________________________________________________");
+    protected String greeting() {
+        return "Hello, I'm Alpha\n" + "What can I do for you?\n";
     }
 
     /**
      * Prints a farewell message when the application is about to close.
      */
-    protected void exit() {
-        System.out.println("____________________________________________________________");
-        System.out.println(" Bye. Hope to see you soon!");
-        System.out.println("____________________________________________________________");
+    protected String exit() {
+        return "Goodbye, hope to see you soon!\n";
     }
 }
