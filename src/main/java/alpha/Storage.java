@@ -129,7 +129,6 @@ public class Storage {
                     yield null;
                 }
             };
-
             if (isDone && task != null) {
                 task.mark();
             }
