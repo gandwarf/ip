@@ -47,16 +47,22 @@ public class Storage {
      *
      * @param tasks The list of tasks to be written to the file.
      */
-    protected void save(ArrayList<Task> tasks) {
+    public void save(ArrayList<Task> tasks) {
         try {
             if (!Files.exists(DATA_PATH)) {
                 Files.createDirectories(DATA_PATH);
             }
             try (BufferedWriter writer = Files.newBufferedWriter(FILE_PATH)) {
-                for (Task task : tasks) {
-                    writer.write(taskToFileFormat(task));
-                    writer.newLine();
-                }
+                tasks.stream()
+                        .map(this::taskToFileFormat)
+                        .forEach(line -> {
+                            try {
+                                writer.write(line);
+                                writer.newLine();
+                            } catch (IOException e) {
+                                throw new RuntimeException("Error writing task to file", e);
+                            }
+                        });
             }
         } catch (IOException e) {
             System.out.println("Error saving tasks: " + e.getMessage());
