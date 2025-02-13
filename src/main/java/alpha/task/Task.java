@@ -68,4 +68,8 @@ public class Task {
             return "[ ] " + taskName;
         }
     }
+
+    public String getTaskName() {
+        return taskName;
+    }
 }

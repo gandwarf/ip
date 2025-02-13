@@ -40,18 +40,18 @@ public class Command {
             case "unmark" -> response.append(taskList.unmarkTask(Integer.parseInt(words[1]) - 1));
             case "todo" -> {
                 ToDo task = new ToDo(words[1]);
-                response.append(taskList.add(task));
+                response.append(taskList.add(task, ui));
             }
             case "deadline" -> {
                 String[] parts = words[1].split(" /by ", 2);
                 Deadline task = new Deadline(parts[0], parts[1]);
-                response.append(taskList.add(task));
+                response.append(taskList.add(task, ui));
             }
             case "event" -> {
                 String[] parts = words[1].split(" /from ", 2);
                 String[] times = parts[1].split(" /to ", 2);
                 Event task = new Event(parts[0], times[0], times[1]);
-                response.append(taskList.add(task));
+                response.append(taskList.add(task, ui));
             }
             case "delete" -> response.append(taskList.deleteTask(Integer.parseInt(words[1]) - 1));
             case "find" -> response.append(taskList.findTasks(words[1]));
