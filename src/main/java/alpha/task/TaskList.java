@@ -18,6 +18,7 @@ public class TaskList {
      * @param storage The storage handler to load tasks from.
      */
     public TaskList(Storage storage) {
+        assert storage != null : "Storage object should not be null.";
         tasks = storage.load();
     }
 
@@ -27,6 +28,7 @@ public class TaskList {
      * @param task The task to be added.
      */
     public String add(Task task) {
+        assert task != null : "Task to be added cannot be null.";
         tasks.add(task);
         return "Got it. I've added this task:\n" + task + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
