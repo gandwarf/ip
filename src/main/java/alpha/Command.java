@@ -5,13 +5,31 @@ import alpha.task.Event;
 import alpha.task.TaskList;
 import alpha.task.ToDo;
 
+/**
+ * Represents a command entered by the user and executes the corresponding operation.
+ */
 public class Command {
     private final String command;
 
+    /**
+     * Constructs a Command instance with the specified command string.
+     *
+     * @param command The user input command.
+     * @throws AssertionError if command is null.
+     */
     public Command(String command) {
+        assert command != null : "command is null";
         this.command = command;
     }
 
+    /**
+     * Executes the command and returns the response message.
+     *
+     * @param ui       The user interface for displaying messages.
+     * @param taskList The task list containing tasks.
+     * @param storage  The storage handler for saving task list data.
+     * @return The response message after executing the command.
+     */
     protected String execute(Ui ui, TaskList taskList, Storage storage) {
         StringBuilder response = new StringBuilder();
         String[] words = command.split("\\s+", 2);
