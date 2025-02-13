@@ -17,9 +17,14 @@ class AlphaTest {
         String response3 = alpha.getResponse("bye");
 
         // Validate responses
-        assertEquals("Added task: [T][ ] Read book", response1.trim(), "Task addition response is incorrect.");
+        assertEquals("Got it. I've added this task:" + System.lineSeparator()
+                        + "[T][ ] Read book" + System.lineSeparator()
+                        + "Now you have 7 tasks in the list.",
+                response1.trim(), "Task addition response is incorrect.");
+
         assertTrue(response2.contains("Here are the tasks in your list:"), "Task list response is incorrect.");
         assertTrue(response2.contains("[T][ ] Read book"), "Task list does not contain the added task.");
+
         assertEquals("Bye. Hope to see you soon!", response3.trim(), "Exit response is incorrect.");
     }
 }

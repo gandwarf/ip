@@ -58,6 +58,7 @@ public class Alpha {
      * </p>
      */
     public String getResponse(String input) {
+        assert input != null : "input is null";
         StringBuilder response = new StringBuilder();
         String[] words = input.split("\\s+", 2);
         try {

@@ -50,6 +50,10 @@ application {
 shadowJar {
     archiveBaseName = "alpha"
     archiveClassifier = null
+    destinationDirectory.set(file("$buildDir/libs"))
+    from {
+        sourceSets.main.resources.srcDirs
+    }
 }
 
 checkstyle {
@@ -58,4 +62,5 @@ checkstyle {
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }
