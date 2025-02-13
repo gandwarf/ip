@@ -1,6 +1,7 @@
 package alpha.task;
 
 import alpha.Storage;
+import alpha.Ui;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;
@@ -19,7 +20,8 @@ class TaskListTest {
     @Test
     void testAddTask() {
         Task todo = new ToDo("Read book");
-        taskList.add(todo);
+        Ui ui = new Ui();
+        taskList.add(todo, ui);
 
         List<Task> tasks = taskList.getTasks();
         assertEquals(1, tasks.size(), "Task list should contain 1 task");

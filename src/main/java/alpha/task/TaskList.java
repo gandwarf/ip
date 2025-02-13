@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import alpha.Storage;
+import alpha.Ui;
 
 /**
  * Represents a list of tasks. Provides methods to add, remove, and modify tasks.
@@ -27,8 +28,17 @@ public class TaskList {
      *
      * @param task The task to be added.
      */
-    public String add(Task task) {
+    public String add(Task task, Ui ui) {
         assert task != null : "Task to be added cannot be null.";
+        if (checkDuplicates(task)) {
+            String userResponse = ui.confirmUserAction(
+                    "Task:\n" + task + "\nalready exists."
+            );
+
+            if (!userResponse.equalsIgnoreCase("y")) {
+                return "Task not added.";
+            }
+        }
         tasks.add(task);
         return "Got it. I've added this task:\n" + task + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
@@ -119,5 +129,9 @@ public class TaskList {
                 + IntStream.range(0, tasks.size())
                         .mapToObj(i -> (i + 1) + ". " + tasks.get(i))
                         .collect(Collectors.joining("\n"));
+    }
+
+    public boolean checkDuplicates(Task task) {
+        return tasks.stream().anyMatch(t -> t.getTaskName().equals(task.getTaskName()));
     }
 }
