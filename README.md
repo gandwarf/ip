@@ -1,26 +1,54 @@
-# Duke project template
+# Alpha User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+![A demo of Alpha](https://raw.githubusercontent.com/gandwarf/ip/a28a8a4516162d58e6f64f5b25879dd48bf8def8/docs/Ui.png)
 
-## Setting up in Intellij
+## Wellcome User
+Feeling overwhelmed by millions of works? Let Alpha help you deal with it!
+Equipped with 
+- text-based📄
+- No entry barrier🎯
+- super fast⚡⚡
+Alpha will do its best
 
-Prerequisites: JDK 17, update Intellij to the most recent version.
+Let's get start:
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+1. download the newest release
+2. run it using `java -jar alpha.java`
+3. add all your tasks
+4. let it git rid of all the trouble for you
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+This is a project template for a greenfield Java project. It's named after the Java mascot _Alpha_. Given below are instructions on how to use it.
+Just use '''list''' to check all your tasks!
+Alpha is a time table robot that provides users with three types of tasks:
+  1. Todo
+  2. Deadline with a deadline time
+  3. Event with start and end time
+Users can use '''todo''', '''deadline''' and '''event''' to create correspond items in the time table, use '''delete''' to delete the out-of-date items.
+And users can also use '''mark''' and '''unmark''' to set one task as "done", use '''find''' to easily pick out the item based on the index
+## Adding tasks
+
+you may add a deadline bt the command: 
+deadline '''task name /by time'''
+the other two types of tasks are added by: 
+'''todo taskname'''
+'''event eventname /from starttime /to endtime
+then one task will be added to the time table and Alpha will inform you your change in the time table like
+![A demo of the execution of the deadline command](https://raw.githubusercontent.com/gandwarf/ip/df1e555e37a704b7e274903fccb7c0ac210463a2/a%20demo%20of%20Alpha.jpg)
+
+## Feature find
+
+The format of the instruction: 
+'''find index'''
+
+then Alpha will print out the task with the input index
+
+## Feature mark and unmark
+
+you may mark or unmark a task by:
+'''mark taskindex'''
+'''unmark taskindex'''
+
+## Feature Duplicate Detection
+
+If you push a task that has already existed in the timetable, Alpha will pop up a window to ask user whether to add this task
+
