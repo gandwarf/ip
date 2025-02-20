@@ -33,7 +33,7 @@ the other two types of tasks are added by:
 `todo taskname`
 `event eventname /from starttime /to endtime`
 then one task will be added to the time table and Alpha will inform you your change in the time table like
-![A demo of the execution of the deadline command](https://raw.githubusercontent.com/gandwarf/ip/df1e555e37a704b7e274903fccb7c0ac210463a2/a%20demo%20of%20Alpha.jpg)
+![A demo of the execution of the deadline command](https://raw.githubusercontent.com/gandwarf/ip/093277a05513956e84b8451683c2e1d377b2617d/a%20demo%20of%20Alpha.jpg)
 
 ## Feature find
 
