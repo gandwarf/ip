@@ -38,7 +38,7 @@ then one task will be added to the time table and Alpha will inform you your cha
 ## Feature find
 
 The format of the instruction: 
-`find index`
+`find keyword`
 
 then Alpha will print out the task with the input index
 
